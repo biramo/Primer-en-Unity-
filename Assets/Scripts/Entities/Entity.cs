@@ -8,6 +8,9 @@ public class Entity : MonoBehaviour
 
     [Header("Stats Player")]
     [SerializeField] private int health=100;
+
+    [SerializeField] private int maxHealth=100;
+
     private bool isDead=false;
     public void TakeDamage(int damage)
     {   
@@ -31,10 +34,20 @@ public class Entity : MonoBehaviour
         Debug.Log($"Destruido: {gameObject.name}");    
     }
 
-    //Properties
+/*___________________________________________________________________________________
+|                                                                                    |
+|                                                                                    |
+|--------------------------------[Properties]----------------------------------------|
+|                                                                                    |
+|____________________________________________________________________________________|
+*/
     public int Health
     {
         get{return health;}
+    } 
+    public int MaxHealth
+    {
+        get{return maxHealth;}
     } 
 
     public bool IsDead

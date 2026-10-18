@@ -5,7 +5,7 @@ public class Enemy : Entity
 {
  
     private NavMeshAgent navMeshAgent;
-    [SerializeField] private float rangoDeteccion=10f;
+    [SerializeField] private float rangeDetection=10f;
 
     [SerializeField] private int damage=20;
     [SerializeField] private float speed = 5f;
@@ -16,6 +16,8 @@ public class Enemy : Entity
     private float attackRateTime=0;
     private float updatePathRate = 0.2f;
     private float nextPathUpdate=0;
+
+    private float attackRange=2f;
 
 
     private Player player;
@@ -32,20 +34,29 @@ public class Enemy : Entity
         }
         navMeshAgent.speed=speed;
     }
-    //--------------------------------[Updates]--------------------------------
-
+/*___________________________________________________________________________________
+|                                                                                    |
+|                                                                                    |
+|--------------------------------[updates]-------------------------------------------|
+|                                                                                    |
+|____________________________________________________________________________________|
+*/
     void Update()
     {   
         UpdateState();
         ExecuteState();
 
     }
-
     private void UpdateState()
-    {
+    {   
+        float DistanceFromPlayer=CalculateDistanceFromPlayer();
         if(Time.time>=nextPathUpdate){
-            if(CalculateDistanceFromPlayer()<=rangoDeteccion){
-                ChangeState(EnemyState.Chasing);                              
+            if(DistanceFromPlayer<= attackRange){
+                ChangeState(EnemyState.Attack);                              
+            }
+            else if (DistanceFromPlayer<=rangeDetection)
+            {
+                ChangeState(EnemyState.Chasing);
             }
             else
             {
@@ -63,8 +74,13 @@ public class Enemy : Entity
 
     }
 
-    //--------------------------------[Ejecucion de los estados]--------------------------------
-
+/*___________________________________________________________________________________
+|                                                                                    |
+|                                                                                    |
+|--------------------------------[Ejecucion de los estados]--------------------------|
+|                                                                                    |
+|____________________________________________________________________________________|
+*/
     private void Chasing()
     {
         navMeshAgent.destination=player.transform.position;
@@ -75,7 +91,7 @@ public class Enemy : Entity
     {
         switch (stateEnemy)
         {
-            case EnemyState.Attack: break;
+            case EnemyState.Attack: Attack(); break;
             case EnemyState.Chasing: Chasing(); break;
             case EnemyState.Patrol: break;
             case EnemyState.Dead: onEntityDead(); break;
@@ -89,21 +105,27 @@ public class Enemy : Entity
         if(stateEnemy==state) return;
 
         stateEnemy=state;
+        Debug.Log($"Estado enemigo: {stateEnemy}");
     }
-      private void OnCollisionStay(Collision collision)
-    {   
+
+/*___________________________________________________________________________________
+|                                                                                    |
+|                                                                                    |
+|--------------------------------[Colision y Muerte]---------------------------------|
+|                                                                                    |
+|____________________________________________________________________________________|
+*/
+
+    private void Attack()
+    {
         if (Time.time < attackRateTime) return;
-        
-        Player hitPlayer = collision.transform
-            .GetComponentInParent<Player>();
-
-        if (hitPlayer == null) return;
-
-        hitPlayer.TakeDamage(damage);
-        Debug.Log(hitPlayer.Health);
+        player.TakeDamage(damage);
+        Debug.Log(player.Health);
 
         attackRateTime = Time.time + attackRate;
     }
+
+
     public override void onEntityDead()
     {     
         stateEnemy=EnemyState.Dead;

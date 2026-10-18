@@ -14,7 +14,7 @@ public class Weapon : MonoBehaviour
     private float shotRate=0.5f;
     private float shotRateTime=0;
 
-
+    //Comprueba si ha pasado el shotRate y dispara la bala  
     public void Shoot()
     {   
         Vector3 origin = cameraTransform.position;
@@ -40,8 +40,9 @@ public class Weapon : MonoBehaviour
             Destroy(newBullet,2);
         }
     }
-    
-   private Vector3 onHit(Vector3 origin, Vector3 direction)
+
+    //Devuelve un Vector3 con el destino de la bala y su origen
+    private Vector3 onHit(Vector3 origin, Vector3 direction)
     {    
         Vector3 aimPoint=cameraTransform.position+direction*maxDistance;//Posicion base del apuntado
         //Devuelve true si colisiona con un objeto con la mascara asignada
