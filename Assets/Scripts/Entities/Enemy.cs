@@ -121,7 +121,6 @@ using UnityEngine.AI;
         {
             if (Time.time < attackRateTime) return;
             player.TakeDamage(damage);
-            Debug.Log(player.Health);
 
             attackRateTime = Time.time + attackRate;
         }
@@ -159,7 +158,6 @@ using UnityEngine.AI;
             stateEnemy=state;
 
             if(state==EnemyState.Dead) OnEntityDead();
-            Debug.Log($"Estado enemigo: {stateEnemy}");
         }
 
     /*___________________________________________________________________________________
@@ -176,11 +174,10 @@ using UnityEngine.AI;
         }  
         public override void OnEntityDead()
         {   
-            Debug.Log("muerte");
             navMeshAgent.isStopped=true;
             //Desactivamos el collider y le cambiamos el color
             collider.enabled=false;
             rdr.material.color=Color.red;
-            Destroy(gameObject,3);  
+            Destroy(gameObject,2);  
         }
     }

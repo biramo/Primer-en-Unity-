@@ -16,7 +16,7 @@ public class Entity : MonoBehaviour
     {   
         if(isDead) return;
 
-        health = Mathf.Clamp(health, 0, 100);
+        health = Mathf.Clamp(health, 0, maxHealth);
         health-=damage;
 
         if (health <= 0)

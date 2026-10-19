@@ -49,10 +49,8 @@ public class Weapon : MonoBehaviour
         if (Physics.Raycast(origin, direction, out RaycastHit hit,maxDistance,EntityMask))
             {       
                 aimPoint=hit.point; //donde a llegado el disparo
-                Debug.Log($"Rayo toca: {hit.collider.name} (capa {LayerMask.LayerToName(hit.collider.gameObject.layer)})");
                 if (hit.collider.TryGetComponent(out Entity entity))//con hit sabemos quien hemos dado y podemos llamar a metodos suyos
                     {
-                        Debug.Log($"TakeDamage en {entity.name}: daño {damage}, vida antes {entity.Health}");
                         entity.TakeDamage(damage);     
                                 
                     }

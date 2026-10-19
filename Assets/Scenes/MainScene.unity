@@ -131,7 +131,6 @@ GameObject:
   - component: {fileID: 35659629}
   - component: {fileID: 35659628}
   - component: {fileID: 35659627}
-  - component: {fileID: 35659631}
   - component: {fileID: 35659633}
   - component: {fileID: 35659632}
   - component: {fileID: 35659634}
@@ -235,20 +234,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1500054682}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &35659631
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 35659626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9da1ecef3d7ffe0e6ad0230c5555716f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Entity
-  health: 100
-  maxHealth: 100
 --- !u!195 &35659632
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -329,7 +314,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 35853621}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1353,7 +1338,7 @@ GameObject:
   - component: {fileID: 1840502986}
   - component: {fileID: 1840502985}
   - component: {fileID: 1840502984}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1737,12 +1722,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1823434065614149763, guid: 07b176f19a7b45447893ce5ab468919f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1823434065614149763, guid: 07b176f19a7b45447893ce5ab468919f, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2350232540569109348, guid: 07b176f19a7b45447893ce5ab468919f, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2527308630238195877, guid: 07b176f19a7b45447893ce5ab468919f, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2527308630238195877, guid: 07b176f19a7b45447893ce5ab468919f, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2527308630238195877, guid: 07b176f19a7b45447893ce5ab468919f, type: 3}
       propertyPath: m_IsActive
@@ -1771,6 +1768,10 @@ PrefabInstance:
     - target: {fileID: 7994903648856687681, guid: 07b176f19a7b45447893ce5ab468919f, type: 3}
       propertyPath: m_Name
       value: WeaponModel
+      objectReference: {fileID: 0}
+    - target: {fileID: 7994903648856687681, guid: 07b176f19a7b45447893ce5ab468919f, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7994903648856687681, guid: 07b176f19a7b45447893ce5ab468919f, type: 3}
       propertyPath: m_IsActive
