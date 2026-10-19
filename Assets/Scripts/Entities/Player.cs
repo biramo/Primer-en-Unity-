@@ -12,7 +12,16 @@ public class Player : Entity
         playerController=GetComponent<PlayerController>();
     }
 
-    public override void onEntityDead()
+    void Update()
+    {
+        CheckIsDead();
+    }
+    private void CheckIsDead()
+    {
+        if (IsDead) OnEntityDead();
+        
+    }  
+    public override void OnEntityDead()
     {   
        FindAnyObjectByType<GameManager>().LoadLoseScene();
     }

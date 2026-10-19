@@ -41,7 +41,7 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    //Devuelve un Vector3 con el destino de la bala y su origen
+    //Devuelve un Vector3 con la direccion des de el arma hasta el punto de impacto
     private Vector3 onHit(Vector3 origin, Vector3 direction)
     {    
         Vector3 aimPoint=cameraTransform.position+direction*maxDistance;//Posicion base del apuntado
@@ -49,10 +49,12 @@ public class Weapon : MonoBehaviour
         if (Physics.Raycast(origin, direction, out RaycastHit hit,maxDistance,EntityMask))
             {       
                 aimPoint=hit.point; //donde a llegado el disparo
-
+                Debug.Log($"Rayo toca: {hit.collider.name} (capa {LayerMask.LayerToName(hit.collider.gameObject.layer)})");
                 if (hit.collider.TryGetComponent(out Entity entity))//con hit sabemos quien hemos dado y podemos llamar a metodos suyos
                     {
-                        entity.TakeDamage(damage);             
+                        Debug.Log($"TakeDamage en {entity.name}: daño {damage}, vida antes {entity.Health}");
+                        entity.TakeDamage(damage);     
+                                
                     }
             }        
         

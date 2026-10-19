@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Player player;
 
     void Update()
-    {
+    {   
+        if(healthBar==null) return;
         healthBar.fillAmount=(float)player.Health/player.MaxHealth;
     }
     public void LoadLoseScene()

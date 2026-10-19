@@ -22,13 +22,12 @@ public class Entity : MonoBehaviour
         if (health <= 0)
         {
             isDead=true;
-            onEntityDead();
             
         }        
        
     }
 
-    public virtual void onEntityDead()
+    public virtual void OnEntityDead()
     {     
         Destroy(gameObject);
         Debug.Log($"Destruido: {gameObject.name}");    
