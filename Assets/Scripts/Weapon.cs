@@ -7,8 +7,10 @@ public class Weapon : MonoBehaviour
 
     [SerializeField] private GameObject bullet;
     [SerializeField] private Transform spawnPoint;
+    [SerializeField] private Transform directionShoot;
+
     private int damage=30;
-    private float maxDistance=15f;
+   [SerializeField] private float maxDistance=15f;
 
     private float shotForce=1500;
     private float shotRate=0.5f;
@@ -58,6 +60,12 @@ public class Weapon : MonoBehaviour
         
         return (aimPoint-spawnPoint.position).normalized;
 
+    }
+     //GETTERS
+
+     public float MaxDistance
+    {
+        get{return maxDistance;}
     }
   
 }

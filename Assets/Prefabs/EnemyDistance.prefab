@@ -214,9 +214,12 @@ MonoBehaviour:
   damage: 20
   chasingSpeed: 5
   patrolingSpeed: 3
-  StoppingDistance: 5
+  StoppingDistance: 8
   wayPoints: []
   attackRate: 3
-  attackRange: 5
+  attackRange: 8
   weaponModel: {fileID: 6114987165718252357, guid: b706466504902f64986933da02fde11a, type: 3}
   weaponHolder: {fileID: 2655917463805333080}
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 128

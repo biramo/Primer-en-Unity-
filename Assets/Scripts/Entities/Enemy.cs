@@ -65,7 +65,7 @@ using UnityEngine.AI;
             UpdateState();
             ExecuteState();
         }
-        private void UpdateState()
+        protected virtual void UpdateState()
         {   
 
             if(stateEnemy==EnemyState.Dead) return;  
@@ -89,7 +89,7 @@ using UnityEngine.AI;
             }         
         }
 
-        public float CalculateDistanceFromAPoint(Transform point)//Nos devuelve la distancia entre el enemigo y el player
+        protected float CalculateDistanceFromAPoint(Transform point)//Nos devuelve la distancia entre el enemigo y el player
         {
             return Vector3.Distance(transform.position,point.position);
 
@@ -109,7 +109,7 @@ using UnityEngine.AI;
             
         }
 
-        public void ExecuteState()
+        protected void ExecuteState()
         {
             switch (stateEnemy)
             {
@@ -154,7 +154,7 @@ using UnityEngine.AI;
        }
 
         //Cambiar el estado actual
-        private void ChangeState(EnemyState state)
+        protected void ChangeState(EnemyState state)
         {
             if(stateEnemy==state) return;
 
@@ -188,17 +188,38 @@ using UnityEngine.AI;
     /*___________________________________________________________________________________
     |                                                                                    |
     |                                                                                    |
-    |--------------------------------[Muerte]---------------------------------|
+    |--------------------------------[Getters]---------------------------------|
     |                                                                                    |
     |____________________________________________________________________________________|
     */ 
-        private float AttackRange
+        public float AttackRange
         {
             get{return attackRange;}
         }
 
-        private float RangeDetection
+        public float RangeDetection
         {
             get {return rangeDetection;}   
+        }
+
+        public Player PlayerTarget
+        {
+            get{return player;}
+        }
+
+        public float NextPathUpdate
+        {
+            get{return nextPathUpdate;}
+            set{nextPathUpdate=value;}
+        }
+
+        public EnemyState StateEnemy
+        {
+            get{return stateEnemy;}
+        }
+
+        public float UpdatePathRate
+        {
+            get{return updatePathRate;}
         }
 }
