@@ -113,9 +113,13 @@ using UnityEngine.AI;
         {
             switch (stateEnemy)
             {
-                case EnemyState.Attack: Attack(); break;
-                case EnemyState.Chasing: Chasing(); break;
-                case EnemyState.Patrol: Patrol(); break;
+                case EnemyState.Attack: 
+                navMeshAgent.stoppingDistance=StoppingDistance;
+                Attack(); break;
+                case EnemyState.Chasing:Chasing(); break;
+                case EnemyState.Patrol: 
+                navMeshAgent.stoppingDistance=DistanceToChangeWayPoint; 
+                Patrol(); break;
                 case EnemyState.Dead:  break;
 
             }

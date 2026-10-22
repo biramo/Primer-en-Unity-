@@ -9,14 +9,13 @@ public class Weapon : MonoBehaviour
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private Transform directionShoot;
 
-    private int damage=30;
+    [SerializeField] private int damage=20;
    [SerializeField] private float maxDistance=15f;
 
     private float shotForce=1500;
     private float shotRate=0.5f;
     private float shotRateTime=0;
 
-    //Comprueba si ha pasado el shotRate y dispara la bala  
     public void Shoot()
     {   
         Vector3 rayOrigin = origin.position;
@@ -24,7 +23,7 @@ public class Weapon : MonoBehaviour
         Vector3 direction = origin.transform.forward;
         Debug.DrawRay(rayOrigin, direction * maxDistance, Color.green, 2f);
 
-        if (Time.time>shotRateTime)//comprueba el tiempo actual
+        if (Time.time>shotRateTime)//Comprueba si ha pasado el shotRate y dispara la bala  
         {   
             
             Vector3 realDirection=onHit(rayOrigin,direction);
@@ -61,9 +60,9 @@ public class Weapon : MonoBehaviour
         return (aimPoint-spawnPoint.position).normalized;
 
     }
-     //GETTERS
-
-     public float MaxDistance
+     
+    //GETTERS
+    public float MaxDistance
     {
         get{return maxDistance;}
     }
