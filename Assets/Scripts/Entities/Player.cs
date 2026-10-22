@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(PlayerController))]
 public class Player : Entity
@@ -22,12 +21,13 @@ public class Player : Entity
     private void CheckIsDead()
     {
         if (IsDead) OnEntityDead();
-        deadHandled=true;
+      
         
     }  
     public override void OnEntityDead()
     {   
-       FindAnyObjectByType<GameManager>().LoadLoseScene();
+       FindAnyObjectByType<GameManager>().LoadScene("LoseScene");
+       deadHandled=true;
     }
     
 }

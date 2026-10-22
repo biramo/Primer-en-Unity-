@@ -1,16 +1,16 @@
+using System;
 using UnityEngine;
 
 
 public class Entity : MonoBehaviour
 {
 
-    [Header("Stats Player")]
-
-    [Header("Stats Player")]
+    [Header("Stats Entity")]
     [SerializeField] private int health=100;
 
     [SerializeField] private int maxHealth=100;
 
+    public event Action<Entity> Died; //Avisa sobre la accion los subscriptores pueden hacer cosas en funcion de eso
     private bool isDead=false;
     public void TakeDamage(int damage)
     {   
@@ -19,18 +19,13 @@ public class Entity : MonoBehaviour
         health = Mathf.Clamp(health, 0, maxHealth);
         health-=damage;
 
-        if (health <= 0)
-        {
-            isDead=true;
-            
-        }        
-       
+        if (health <= 0) isDead=true;
     }
 
     public virtual void OnEntityDead()
     {     
-        Destroy(gameObject);
         Debug.Log($"Destruido: {gameObject.name}");    
+        Died?.Invoke(this);
     }
 
 /*___________________________________________________________________________________

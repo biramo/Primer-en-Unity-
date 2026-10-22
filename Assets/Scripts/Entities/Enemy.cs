@@ -174,6 +174,7 @@ using UnityEngine.AI;
         }  
         public override void OnEntityDead()
         {   
+            base.OnEntityDead();
             navMeshAgent.isStopped=true;
             //Desactivamos el collider y le cambiamos el color
             collider.enabled=false;
