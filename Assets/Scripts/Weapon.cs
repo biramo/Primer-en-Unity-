@@ -3,7 +3,7 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 { 
     [SerializeField] private LayerMask EntityMask;
-    [SerializeField] private Transform cameraTransform;
+    [SerializeField] private Transform origin;
 
     [SerializeField] private GameObject bullet;
     [SerializeField] private Transform spawnPoint;
@@ -17,15 +17,15 @@ public class Weapon : MonoBehaviour
     //Comprueba si ha pasado el shotRate y dispara la bala  
     public void Shoot()
     {   
-        Vector3 origin = cameraTransform.position;
+        Vector3 rayOrigin = origin.position;
         Vector3 originBullet=spawnPoint.position;
-        Vector3 direction = cameraTransform.transform.forward;
-        Debug.DrawRay(origin, direction * maxDistance, Color.green, 2f);
+        Vector3 direction = origin.transform.forward;
+        Debug.DrawRay(rayOrigin, direction * maxDistance, Color.green, 2f);
 
         if (Time.time>shotRateTime)//comprueba el tiempo actual
         {   
             
-            Vector3 realDirection=onHit(origin,direction);
+            Vector3 realDirection=onHit(rayOrigin,direction);
             GameObject newBullet;
 
             //instanciación de una bala
@@ -41,10 +41,10 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    //Devuelve un Vector3 con la direccion des de el arma hasta el punto de impacto
+    //Devuelve un Vector3 con la direccion des de el origen(origin) hasta el punto de impacto
     private Vector3 onHit(Vector3 origin, Vector3 direction)
     {    
-        Vector3 aimPoint=cameraTransform.position+direction*maxDistance;//Posicion base del apuntado
+        Vector3 aimPoint=origin+direction*maxDistance;//Posicion base del apuntado
         //Devuelve true si colisiona con un objeto con la mascara asignada
         if (Physics.Raycast(origin, direction, out RaycastHit hit,maxDistance,EntityMask))
             {       
