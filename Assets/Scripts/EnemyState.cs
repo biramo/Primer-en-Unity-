@@ -1,4 +1,4 @@
-enum EnemyState
+public enum EnemyState
 {   
     Patrol,
     Chasing,    

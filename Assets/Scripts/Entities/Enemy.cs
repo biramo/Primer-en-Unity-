@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
-    public class Enemy : Entity
+    public abstract class Enemy : Entity
     {
 //------------------------------Nav Mesh Variables--------------------------------
         private NavMeshAgent navMeshAgent;
@@ -9,6 +9,8 @@ using UnityEngine.AI;
         [SerializeField] private int damage=20;
         [SerializeField] private float chasingSpeed = 5f;
         [SerializeField] private float patrolingSpeed = 3f;
+        [SerializeField] private float StoppingDistance = 1f;
+
 
 //------------------------------Object Variables--------------------------------
         private Renderer rdr;
@@ -25,11 +27,11 @@ using UnityEngine.AI;
 
         private EnemyState stateEnemy;
         
-        private float attackRate=1f;
+        [SerializeField] private float attackRate=1f;
         private float attackRateTime=0;
         private float updatePathRate = 0.2f;
         private float nextPathUpdate=0;
-        private float attackRange=2f;
+        [SerializeField] private float attackRange=3f;
         private float DistanceToChangeWayPoint=2f;
         private Player player;
 
@@ -39,7 +41,9 @@ using UnityEngine.AI;
             rdr=GetComponentInChildren<Renderer>();
             navMeshAgent=GetComponent<NavMeshAgent>();
             player=FindAnyObjectByType<Player>();
+            navMeshAgent.stoppingDistance=StoppingDistance;
             stateEnemy=EnemyState.Patrol;
+
 
             if (player == null)//Si no encuentra al player desactivamos los update
             {
@@ -61,17 +65,17 @@ using UnityEngine.AI;
             UpdateState();
             ExecuteState();
         }
-        private void UpdateState()
+        protected virtual void UpdateState()
         {   
 
-            if(stateEnemy==EnemyState.Dead) return;
+            if(stateEnemy==EnemyState.Dead) return;  
 
             float DistanceFromPlayer=CalculateDistanceFromAPoint(player.transform);
             if(Time.time>=nextPathUpdate){
-                if(DistanceFromPlayer<= attackRange){
+                if(DistanceFromPlayer<= AttackRange){
                     ChangeState(EnemyState.Attack);                              
                 }
-                else if (DistanceFromPlayer<=rangeDetection)
+                else if (DistanceFromPlayer<=RangeDetection)
                 {
                     ChangeState(EnemyState.Chasing);
                 }
@@ -82,10 +86,10 @@ using UnityEngine.AI;
                     
                 }
                 nextPathUpdate=Time.time+updatePathRate;
-            }
+            }         
         }
 
-        private float CalculateDistanceFromAPoint(Transform point)//Nos devuelve la distancia entre el enemigo y el player
+        protected float CalculateDistanceFromAPoint(Transform point)//Nos devuelve la distancia entre el enemigo y el player
         {
             return Vector3.Distance(transform.position,point.position);
 
@@ -99,25 +103,29 @@ using UnityEngine.AI;
     |____________________________________________________________________________________|
     */
         private void Chasing()
-        {
+        {   
+            navMeshAgent.isStopped=false;
             navMeshAgent.destination=player.transform.position;
             navMeshAgent.speed=chasingSpeed;
             
-            
         }
 
-        private void ExecuteState()
+        protected void ExecuteState()
         {
             switch (stateEnemy)
             {
-                case EnemyState.Attack: Attack(); break;
-                case EnemyState.Chasing: Chasing(); break;
-                case EnemyState.Patrol: Patrol(); break;
+                case EnemyState.Attack: 
+                navMeshAgent.stoppingDistance=StoppingDistance;
+                Attack(); break;
+                case EnemyState.Chasing:Chasing(); break;
+                case EnemyState.Patrol: 
+                navMeshAgent.stoppingDistance=DistanceToChangeWayPoint; 
+                Patrol(); break;
                 case EnemyState.Dead:  break;
 
             }
         }
-        private void Attack()
+        protected virtual void Attack()
         {
             if (Time.time < attackRateTime) return;
             player.TakeDamage(damage);
@@ -151,7 +159,7 @@ using UnityEngine.AI;
        }
 
         //Cambiar el estado actual
-        private void ChangeState(EnemyState state)
+        protected void ChangeState(EnemyState state)
         {
             if(stateEnemy==state) return;
 
@@ -181,4 +189,47 @@ using UnityEngine.AI;
             rdr.material.color=Color.red;
             Destroy(gameObject,2);  
         }
-    }
+
+    /*___________________________________________________________________________________
+    |                                                                                    |
+    |                                                                                    |
+    |--------------------------------[Getters]---------------------------------|
+    |                                                                                    |
+    |____________________________________________________________________________________|
+    */ 
+        public float AttackRange
+        {
+            get{return attackRange;}
+        }
+
+        public float RangeDetection
+        {
+            get {return rangeDetection;}   
+        }
+
+        public Player PlayerTarget
+        {
+            get{return player;}
+        }
+
+        public float NextPathUpdate
+        {
+            get{return nextPathUpdate;}
+            set{nextPathUpdate=value;}
+        }
+
+        public EnemyState StateEnemy
+        {
+            get{return stateEnemy;}
+        }
+
+        public float UpdatePathRate
+        {
+            get{return updatePathRate;}
+        }
+
+        public NavMeshAgent Agent
+        {
+           get{return navMeshAgent;} 
+        }
+}

@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 58428430457600939}
   - component: {fileID: 2551478884772949829}
   - component: {fileID: 9105185640551402074}
-  - component: {fileID: 2406992204707655366}
+  - component: {fileID: 8197559187048542427}
   m_Layer: 6
-  m_Name: Enemy
+  m_Name: EnemyMele
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -164,7 +164,7 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &2406992204707655366
+--- !u!114 &8197559187048542427
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -173,15 +173,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 6641006125350567547}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4b1d94ba80972dd385ea4067d2d3540, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a46683f92708867fa48f3ae1f04adaa, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Enemy
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyMele
   health: 100
   maxHealth: 100
-  rangeDetection: 15
+  rangeDetection: 10
   damage: 20
   chasingSpeed: 5
-  patrolingSpeed: 2
+  patrolingSpeed: 3
+  StoppingDistance: 1
   wayPoints:
   - {fileID: 0}
   - {fileID: 0}
