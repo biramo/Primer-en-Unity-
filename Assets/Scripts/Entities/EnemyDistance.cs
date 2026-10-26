@@ -66,24 +66,26 @@ public class EnemyDistance : Enemy
         Vector3 origin=transform.position;
         Vector3 target=PlayerTarget.transform.position;
 
-        Vector3 direction=origin-target;
+        Vector3 direction=target-origin;
 
-        if(Physics.Raycast(origin, direction, weapon.MaxDistance, obstacleMask)) return false;
+
+        if(Physics.Raycast(origin, direction, out RaycastHit hit,weapon.MaxDistance, obstacleMask)) return false;
 
         return true; 
     }
 
-    private void AimAtTarget()
+    private void AimAtTarget()//Comprueba la direccion del player
     {
         Vector3 direction=PlayerTarget.transform.position - weapon.transform.position;//Calcula la direccion al disparo, desde el origen hasta el player
         transform.rotation=Quaternion.LookRotation(direction);//Unity convierte ese vector en una rotación que hace que el eje forward del objeto apunte hacia esa dirección
          
     }
-    protected override void Attack() //Ataca comprobando cada vez la direccion del player
+    protected override void Attack() 
     {
         if (weapon == null || PlayerTarget==null) return;
+        Agent.isStopped=true;
 
-        if (Time.time >= aimAtTargetUpdate)
+        if (Time.time >= aimAtTargetUpdate)//Cada cierto tiempo comprueba la direccion si no tendria aimbot
         {
             AimAtTarget();
             aimAtTargetUpdate=Time.time+aimAtTargetRate;

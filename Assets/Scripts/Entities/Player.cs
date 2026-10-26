@@ -25,7 +25,8 @@ public class Player : Entity
         
     }  
     public override void OnEntityDead()
-    {   
+    {  
+       base.OnEntityDead();
        FindAnyObjectByType<GameManager>().LoadScene("LoseScene");
        deadHandled=true;
     }

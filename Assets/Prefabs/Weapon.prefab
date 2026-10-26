@@ -190,9 +190,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c69943386b94e7ba9202ca49146bd04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
-  EntityMask:
+  entityMask:
     serializedVersion: 2
     m_Bits: 64
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 128
   origin: {fileID: 2844839502414115732}
   bullet: {fileID: 6931603491535867256, guid: e155d6e390f2b9837a988b3c3b2e5424, type: 3}
   spawnPoint: {fileID: 2844839502414115732}

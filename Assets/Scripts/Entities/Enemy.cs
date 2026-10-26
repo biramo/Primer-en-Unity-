@@ -31,7 +31,7 @@ using UnityEngine.AI;
         private float attackRateTime=0;
         private float updatePathRate = 0.2f;
         private float nextPathUpdate=0;
-        [SerializeField] private float attackRange=2f;
+        [SerializeField] private float attackRange=3f;
         private float DistanceToChangeWayPoint=2f;
         private Player player;
 
@@ -103,7 +103,8 @@ using UnityEngine.AI;
     |____________________________________________________________________________________|
     */
         private void Chasing()
-        {
+        {   
+            navMeshAgent.isStopped=false;
             navMeshAgent.destination=player.transform.position;
             navMeshAgent.speed=chasingSpeed;
             
@@ -225,5 +226,10 @@ using UnityEngine.AI;
         public float UpdatePathRate
         {
             get{return updatePathRate;}
+        }
+
+        public NavMeshAgent Agent
+        {
+           get{return navMeshAgent;} 
         }
 }

@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 { 
-    [SerializeField] private LayerMask EntityMask;
+    [SerializeField] private LayerMask entityMask;
+    [SerializeField] private LayerMask obstacleMask;
+
+
     [SerializeField] private Transform origin;
 
     [SerializeField] private GameObject bullet;
     [SerializeField] private Transform spawnPoint;
-    [SerializeField] private Transform directionShoot;
-
     [SerializeField] private int damage=20;
    [SerializeField] private float maxDistance=15f;
 
@@ -21,11 +22,10 @@ public class Weapon : MonoBehaviour
         Vector3 rayOrigin = origin.position;
         Vector3 originBullet=spawnPoint.position;
         Vector3 direction = origin.transform.forward;
-        Debug.DrawRay(rayOrigin, direction * maxDistance, Color.green, 2f);
 
         if (Time.time>shotRateTime)//Comprueba si ha pasado el shotRate y dispara la bala  
         {   
-            
+            Debug.DrawRay(rayOrigin, direction * maxDistance, Color.green, 2f);
             Vector3 realDirection=onHit(rayOrigin,direction);
             GameObject newBullet;
 
@@ -46,15 +46,18 @@ public class Weapon : MonoBehaviour
     private Vector3 onHit(Vector3 origin, Vector3 direction)
     {    
         Vector3 aimPoint=origin+direction*maxDistance;//Posicion base del apuntado
+        //Primero comprobamos que no hemos colisionado con un obstaculo
+        if(!Physics.Raycast(origin,direction,maxDistance,obstacleMask)){
         //Devuelve true si colisiona con un objeto con la mascara asignada
-        if (Physics.Raycast(origin, direction, out RaycastHit hit,maxDistance,EntityMask))
-            {       
-                aimPoint=hit.point; //donde a llegado el disparo
-                if (hit.collider.TryGetComponent(out Entity entity))//con hit sabemos quien hemos dado y podemos llamar a metodos suyos
-                    {
-                        entity.TakeDamage(damage);     
-                                
-                    }
+            if (Physics.Raycast(origin, direction, out RaycastHit hit,maxDistance,entityMask))
+                {       
+                    aimPoint=hit.point; //donde a llegado el disparo
+                    if (hit.collider.TryGetComponent(out Entity entity))//con hit sabemos quien hemos dado y podemos llamar a metodos suyos
+                        {
+                            entity.TakeDamage(damage);     
+                                    
+                        }
+                }
             }        
         
         return (aimPoint-spawnPoint.position).normalized;
