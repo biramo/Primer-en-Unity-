@@ -3916,7 +3916,7 @@ GameObject:
   - component: {fileID: 376935711}
   - component: {fileID: 376935710}
   m_Layer: 5
-  m_Name: ActualAmmoCharged
+  m_Name: AmmoInMagazine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4775,7 +4775,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -34, y: 0}
+  m_AnchoredPosition: {x: -7, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &717086388
@@ -5068,6 +5068,7 @@ MonoBehaviour:
   player: {fileID: 1611424951}
   weapon: {fileID: 1759131438288857399}
   totalAmmoText: {fileID: 1695202420}
+  ammoInMagazineText: {fileID: 376935710}
 --- !u!43 &797071804
 Mesh:
   m_ObjectHideFlags: 0
@@ -10842,6 +10843,10 @@ PrefabInstance:
       propertyPath: sprintAction
       value: 
       objectReference: {fileID: -7471211009204490832, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    - target: {fileID: -1087380238523276233, guid: 07b176f19a7b45447893ce5ab468919f, type: 3}
+      propertyPath: rechargeAction
+      value: 
+      objectReference: {fileID: 8328029124469748825, guid: 052faaac586de48259a63d0c4782560b, type: 3}
     - target: {fileID: -805154854319882506, guid: 07b176f19a7b45447893ce5ab468919f, type: 3}
       propertyPath: groundCheck
       value: 

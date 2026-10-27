@@ -18,28 +18,47 @@ public class Weapon : MonoBehaviour
     //---------------Prefab bala---------------
     [SerializeField] private GameObject bullet;
 
-    //---------------Stats del arma---------------
+    //---------------[Stats del arma]---------------
     [SerializeField] private int damage=20;
    [SerializeField] private float maxDistance=15f;
 
+    //---------------[Stats de la municion]---------------
+
     [SerializeField] private int ammo=120;
 
-    [SerializeField] private int ammoInCharger=7;//Cuantas balas caben en el cargador
+    [SerializeField] private int maxAmmoInCharger=7;//Cuantas balas caben en el cargador
+    [SerializeField] private int ammoInMagazine = 7; //Cuantas tiene actualmente
 
     [SerializeField] private int maxAmmo=300;
+
+    //---------------[Stats del disparo]---------------
+
     private float shotForce=1500;
     private float shotRate=0.5f;
     private float shotRateTime=0;
 
     //Avisa sobre la accion los subscriptores pueden hacer cosas en funcion de eso
-    public event Action<int> AmmoUpdate; 
+    public event Action<int,int> AmmoUpdate; //Pasamos la municion total y la que tiene en el cargador
 
     private bool infiniteAmmo=false;
 
 
-    private void showAmmoEvent(int ammo)
+    private void ShowAmmoEvent(int ammo, int ammoInMagazine)
     {
-        AmmoUpdate?.Invoke(ammo);
+        AmmoUpdate?.Invoke(ammo,ammoInMagazine);
+    }
+
+    public void Recharge()
+    {
+        if(ammoInMagazine>=maxAmmoInCharger || ammo<=0) return;
+
+        int ammoNeeded = maxAmmoInCharger - ammoInMagazine;
+        int ammoToLoad = Math.Min(ammoNeeded, ammo);//Coge el valor mas pequeño, si hay pocas balas las de ammo si no las que necesita
+
+        ammoInMagazine += ammoToLoad;
+        ammo -= ammoToLoad;
+
+        ShowAmmoEvent(ammo,ammoInMagazine);
     }
     public void Shoot()
     {   
@@ -48,7 +67,7 @@ public class Weapon : MonoBehaviour
         Vector3 direction = origin.transform.forward;
 
         bool isAnEntity=Time.time>shotRateTime&&infiniteAmmo;//Comprueba si ha pasada el tiempo y si es una entidad no tiene limite de balas
-        bool hasBulletsAndTimePassed=Time.time>shotRateTime&&ammo>0;//Comprueba si ha pasado el shotRate y tiene balas entonces dispara la bala
+        bool hasBulletsAndTimePassed=Time.time>shotRateTime&&ammoInMagazine>0;//Comprueba si ha pasado el shotRate y tiene balas entonces en el cargador dispara la bala
 
         if ( hasBulletsAndTimePassed|| isAnEntity) 
         {   
@@ -67,7 +86,7 @@ public class Weapon : MonoBehaviour
         
             Destroy(newBullet,2);
 
-            if(!infiniteAmmo) showAmmoEvent(--ammo);
+            if(!infiniteAmmo) ShowAmmoEvent(ammo,--ammoInMagazine);
         }
     }
 
@@ -102,6 +121,11 @@ public class Weapon : MonoBehaviour
     public int Ammo
     {
         get{return ammo;}
+    }
+
+    public int AmmoInMagazine
+    {
+        get{return ammoInMagazine;}
     }
 
     public bool InfiniteAmmo

@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private InputActionReference sprintAction;
 
     [SerializeField] private InputActionReference shootAction;
+    [SerializeField] private InputActionReference rechargeAction;
+
 
     private Movement movement;
     private Look look;
@@ -66,6 +68,7 @@ public class PlayerController : MonoBehaviour
 
         if (jumpAction.action.WasPressedThisFrame()) jumpRequested = true;
         if (shootAction.action.WasPressedThisFrame()) weapon.Shoot();
+        if(rechargeAction.action.WasPressedThisFrame()) weapon.Recharge();
         isSprinting = sprintAction.action.IsPressed();
         look.Rotate(lookAction.action.ReadValue<Vector2>());
     }

@@ -8,6 +8,7 @@ public class Hud : MonoBehaviour
     [SerializeField] private Player player;
     [SerializeField] private Weapon weapon;
     [SerializeField] private TMP_Text totalAmmoText;
+    [SerializeField] private TMP_Text ammoInMagazineText;
 
    void Awake()
     {
@@ -25,7 +26,7 @@ public class Hud : MonoBehaviour
         // suscribirse al evento del arma
         // pintar el valor actual una vez, para no esperar al primer disparo
         weapon.AmmoUpdate+=UpdateAmmo;
-        UpdateAmmo(weapon.Ammo);
+        UpdateAmmo(weapon.Ammo,weapon.AmmoInMagazine);
     }
 
     private void OnDisable()
@@ -35,9 +36,10 @@ public class Hud : MonoBehaviour
 
     }
 
-    private void UpdateAmmo(int totalAmmo)
+    private void UpdateAmmo(int totalAmmo, int ammoInMagazine)
     {
         totalAmmoText.text=totalAmmo.ToString();
+        ammoInMagazineText.text=ammoInMagazine.ToString();
     }
 
     private void UpdateHealth()
