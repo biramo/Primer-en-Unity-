@@ -4,14 +4,21 @@ using System;
 
 public class Weapon : MonoBehaviour
 { 
+
+    //---------------Mascaras de entidades---------------
     [SerializeField] private LayerMask entityMask;
     [SerializeField] private LayerMask obstacleMask;
 
+    //---------------Posiciones---------------
 
     [SerializeField] private Transform origin;
-
-    [SerializeField] private GameObject bullet;
     [SerializeField] private Transform spawnPoint;
+    
+    
+    //---------------Prefab bala---------------
+    [SerializeField] private GameObject bullet;
+
+    //---------------Stats del arma---------------
     [SerializeField] private int damage=20;
    [SerializeField] private float maxDistance=15f;
 
@@ -23,7 +30,11 @@ public class Weapon : MonoBehaviour
     private float shotForce=1500;
     private float shotRate=0.5f;
     private float shotRateTime=0;
-    public event Action<int> AmmoUpdate; //Avisa sobre la accion los subscriptores pueden hacer cosas en funcion de eso
+
+    //Avisa sobre la accion los subscriptores pueden hacer cosas en funcion de eso
+    public event Action<int> AmmoUpdate; 
+
+    private bool infiniteAmmo=false;
 
 
     private void showAmmoEvent(int ammo)
@@ -36,7 +47,10 @@ public class Weapon : MonoBehaviour
         Vector3 originBullet=spawnPoint.position;
         Vector3 direction = origin.transform.forward;
 
-        if (Time.time>shotRateTime&&ammo>0)//Comprueba si ha pasado el shotRate y tiene balas entonces dispara la bala  
+        bool isAnEntity=Time.time>shotRateTime&&infiniteAmmo;//Comprueba si ha pasada el tiempo y si es una entidad no tiene limite de balas
+        bool hasBulletsAndTimePassed=Time.time>shotRateTime&&ammo>0;//Comprueba si ha pasado el shotRate y tiene balas entonces dispara la bala
+
+        if ( hasBulletsAndTimePassed|| isAnEntity) 
         {   
             Debug.DrawRay(rayOrigin, direction * maxDistance, Color.green, 2f);
             Vector3 realDirection=onHit(rayOrigin,direction);
@@ -53,7 +67,7 @@ public class Weapon : MonoBehaviour
         
             Destroy(newBullet,2);
 
-            showAmmoEvent(--ammo);
+            if(!infiniteAmmo) showAmmoEvent(--ammo);
         }
     }
 
@@ -88,6 +102,11 @@ public class Weapon : MonoBehaviour
     public int Ammo
     {
         get{return ammo;}
+    }
+
+    public bool InfiniteAmmo
+    {
+        set{infiniteAmmo=value;}
     }
   
 }

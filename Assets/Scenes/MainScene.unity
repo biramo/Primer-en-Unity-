@@ -10814,6 +10814,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1500054682}
     m_Modifications:
+    - target: {fileID: -3826607297979794370, guid: 07b176f19a7b45447893ce5ab468919f, type: 3}
+      propertyPath: health
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: -3826607297979794370, guid: 07b176f19a7b45447893ce5ab468919f, type: 3}
+      propertyPath: maxHealth
+      value: 10000
+      objectReference: {fileID: 0}
     - target: {fileID: -1087380238523276233, guid: 07b176f19a7b45447893ce5ab468919f, type: 3}
       propertyPath: jumpAction
       value: 

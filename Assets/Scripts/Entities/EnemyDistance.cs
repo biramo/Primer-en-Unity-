@@ -27,6 +27,8 @@ public class EnemyDistance : Enemy
         // Obtener el script del arma
         weapon = weaponObject.GetComponent<Weapon>();
 
+        weapon.InfiniteAmmo=true;
+
         if (weapon == null)
         {
             Debug.LogError(
