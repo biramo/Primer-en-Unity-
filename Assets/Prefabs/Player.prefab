@@ -183,7 +183,6 @@ GameObject:
   - component: {fileID: 8920381186597824429}
   - component: {fileID: -805154854319882506}
   - component: {fileID: -687521572981935192}
-  - component: {fileID: 5204616696216183251}
   - component: {fileID: -1087380238523276233}
   - component: {fileID: -3826607297979794370}
   m_Layer: 6
@@ -354,24 +353,6 @@ MonoBehaviour:
   sensitivity: 0.1
   minPitch: -80
   maxPitch: 80
---- !u!114 &5204616696216183251
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2527308630238195877}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c69943386b94e7ba9202ca49146bd04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Weapon
-  EntityMask:
-    serializedVersion: 2
-    m_Bits: 0
-  cameraTransform: {fileID: 0}
-  bullet: {fileID: 0}
-  spawnPoint: {fileID: 0}
 --- !u!114 &-1087380238523276233
 MonoBehaviour:
   m_ObjectHideFlags: 0

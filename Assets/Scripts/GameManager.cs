@@ -1,16 +1,11 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {   
-
-    [SerializeField ]private Image healthBar;
-    [SerializeField] private Player player;
-
     [SerializeField] private List<Enemy> enemies;
+    [SerializeField] private Player player;
 
     private int enemiesCount;
 
@@ -19,10 +14,8 @@ public class GameManager : MonoBehaviour
         enemiesCount=enemies.Count;
     }
     void Update()
-    {   
-        if(healthBar==null) return;
-        healthBar.fillAmount=(float)player.Health/player.MaxHealth;
-        if(enemiesCount<=0) LoadScene("WinScene");
+    {   if(player==null) return;
+        if(enemiesCount<=0 && !player.IsDead) LoadScene("WinScene");
     }
 
     void OnEnable()

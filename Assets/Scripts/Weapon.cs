@@ -1,4 +1,6 @@
 using UnityEngine;
+using System;
+
 
 public class Weapon : MonoBehaviour
 { 
@@ -13,17 +15,28 @@ public class Weapon : MonoBehaviour
     [SerializeField] private int damage=20;
    [SerializeField] private float maxDistance=15f;
 
+    [SerializeField] private int ammo=120;
+
+    [SerializeField] private int ammoInCharger=7;//Cuantas balas caben en el cargador
+
+    [SerializeField] private int maxAmmo=300;
     private float shotForce=1500;
     private float shotRate=0.5f;
     private float shotRateTime=0;
+    public event Action<int> AmmoUpdate; //Avisa sobre la accion los subscriptores pueden hacer cosas en funcion de eso
 
+
+    private void showAmmoEvent(int ammo)
+    {
+        AmmoUpdate?.Invoke(ammo);
+    }
     public void Shoot()
     {   
         Vector3 rayOrigin = origin.position;
         Vector3 originBullet=spawnPoint.position;
         Vector3 direction = origin.transform.forward;
 
-        if (Time.time>shotRateTime)//Comprueba si ha pasado el shotRate y dispara la bala  
+        if (Time.time>shotRateTime&&ammo>0)//Comprueba si ha pasado el shotRate y tiene balas entonces dispara la bala  
         {   
             Debug.DrawRay(rayOrigin, direction * maxDistance, Color.green, 2f);
             Vector3 realDirection=onHit(rayOrigin,direction);
@@ -39,6 +52,8 @@ public class Weapon : MonoBehaviour
             shotRateTime=Time.time+shotRate; //le suma el rate al tiempo actual limitando el disparo
         
             Destroy(newBullet,2);
+
+            showAmmoEvent(--ammo);
         }
     }
 
@@ -68,6 +83,11 @@ public class Weapon : MonoBehaviour
     public float MaxDistance
     {
         get{return maxDistance;}
+    }
+
+    public int Ammo
+    {
+        get{return ammo;}
     }
   
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Movement), typeof(Look), typeof(Weapon))]
+[RequireComponent(typeof(Movement), typeof(Look))]
 public class PlayerController : MonoBehaviour
 {
     [Header("Input")]
@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     {
         movement = GetComponent<Movement>();
         look = GetComponent<Look>();
-        weapon = GetComponent<Weapon>();
+        weapon = GetComponentInChildren<Weapon>();
     }
 
     private void Start()
