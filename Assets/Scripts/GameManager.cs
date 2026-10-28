@@ -26,17 +26,24 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void OnDisable()//Al eliminar el objeto hay que desuscribirse
+    void OnDisable()
+{
+    if (enemies == null) return;
+
+    foreach (Entity e in enemies)
     {
-        foreach(Entity e in enemies)
+        if (e != null)
         {
-            e.Died-=HandleEnemyDead;
+            e.Died -= HandleEnemyDead;
         }
     }
+}
+    
 
     private void HandleEnemyDead(Entity e)
     {
         if(e.IsDead) enemiesCount--;
+        e.Died-=HandleEnemyDead;
     }
     public void LoadScene(string scene)
     {

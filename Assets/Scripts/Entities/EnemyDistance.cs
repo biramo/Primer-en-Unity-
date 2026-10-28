@@ -79,7 +79,7 @@ public class EnemyDistance : Enemy
     private void AimAtTarget()//Comprueba la direccion del player
     {
         Vector3 direction=PlayerTarget.transform.position - weapon.transform.position;//Calcula la direccion al disparo, desde el origen hasta el player
-        transform.rotation=Quaternion.LookRotation(direction);//Unity convierte ese vector en una rotación que hace que el eje forward del objeto apunte hacia esa dirección
+        weapon.transform.rotation=Quaternion.LookRotation(direction);//Unity convierte ese vector en una rotación que hace que el eje forward del objeto apunte hacia esa dirección
          
     }
     protected override void Attack() 
