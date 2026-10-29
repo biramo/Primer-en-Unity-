@@ -67,6 +67,8 @@ public class Weapon : MonoBehaviour
         int ammoToLoad=Math.Min(ammoNeeded,munition);
 
         ammo+=ammoToLoad;
+
+        ShowAmmoEvent(ammo,ammoInMagazine);
     }
     public void Shoot()
     {   
@@ -130,6 +132,12 @@ public class Weapon : MonoBehaviour
     {
         get{return ammo;}
     }
+
+    public int MaxAmmo
+    {
+        get{return maxAmmo;}
+    }
+
 
     public int AmmoInMagazine
     {

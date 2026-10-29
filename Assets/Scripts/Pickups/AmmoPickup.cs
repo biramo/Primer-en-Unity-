@@ -7,10 +7,12 @@ public class NewMonoBehaviourScript : Pickup
     {
 
        Weapon weapon=player.GetComponentInChildren<Weapon>();
-
+    
        if(weapon==null)return;
 
-       weapon.RecibeAmmo(amountAmoo);
+       if(weapon.Ammo>=weapon.MaxAmmo) return;
+
+        weapon.RecibeAmmo(amountAmoo);
 
         base.collectPickup(player);
     }
