@@ -55,8 +55,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.07789265, y: 0.20363034, z: 0.08726563}
-  m_Center: {x: -0.0028195896, y: 0.019278068, z: -0.012838199}
+  m_Size: {x: 0.077892534, y: 0.20363034, z: 0.0654977}
+  m_Center: {x: -0.0028195893, y: 0.019278072, z: -0.0019542507}
 --- !u!54 &4217945404439143384
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -247,7 +247,7 @@ GameObject:
   - component: {fileID: 6786249140749735233}
   - component: {fileID: 4851267136843452816}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: Proyectil
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 7749787494685052023}
   - component: {fileID: 724210092868618082}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: cap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

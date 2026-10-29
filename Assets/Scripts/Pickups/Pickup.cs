@@ -21,9 +21,9 @@ public abstract class Pickup : MonoBehaviour
 
 
     //----------------[Componentes a desabilitar]----------------
-    private Collider pickupCollider;
+    private Collider[] pickupCollider;
 
-    private Renderer pickupRenderer;
+    private Renderer[] pickupRenderer;
     
     [SerializeField] private Light pickupLight;
 
@@ -32,8 +32,8 @@ public abstract class Pickup : MonoBehaviour
     {
         startPositionY=transform.position.y;
         isActive=true;
-        pickupCollider=GetComponentInChildren<Collider>();
-        pickupRenderer=GetComponentInChildren<Renderer>();
+        pickupCollider=GetComponentsInChildren<Collider>();
+        pickupRenderer=GetComponentsInChildren<Renderer>();
 
     }
 
@@ -42,12 +42,28 @@ public abstract class Pickup : MonoBehaviour
         if(isActive) return;
 
         if (Time.time > respawnTimer)  
-        {
-            pickupRenderer.enabled=true;
-            pickupCollider.enabled=true;
+        {   
+            ToggleRenderer(true);
+            ToggleCollider(true);
             pickupLight.enabled=true;
             isActive=true; 
               
+        }
+    }
+
+    private void ToggleRenderer(bool toogle)
+    {
+        foreach(Renderer r in pickupRenderer)
+        {
+            r.enabled=toogle;
+        }
+    }
+
+     private void ToggleCollider(bool toogle)
+    {
+        foreach(Collider r in pickupCollider)
+        {
+            r.enabled=toogle;
         }
     }
 
@@ -56,9 +72,9 @@ public abstract class Pickup : MonoBehaviour
         if (!isActive) return;
         isActive=false;
 
-        pickupRenderer.enabled=false;
+        ToggleRenderer(false);
 
-        pickupCollider.enabled=false;
+        ToggleCollider(false);
 
         pickupLight.enabled=false;
 

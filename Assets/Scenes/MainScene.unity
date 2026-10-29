@@ -11138,11 +11138,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4774935136704102351, guid: 17d5316533d04fbddbaedaa878d60f11, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.88
+      value: 1.336
       objectReference: {fileID: 0}
     - target: {fileID: 4774935136704102351, guid: 17d5316533d04fbddbaedaa878d60f11, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 19.02692
+      value: 19.016
       objectReference: {fileID: 0}
     - target: {fileID: 4774935136704102351, guid: 17d5316533d04fbddbaedaa878d60f11, type: 3}
       propertyPath: m_LocalRotation.w
@@ -11170,6 +11170,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4774935136704102351, guid: 17d5316533d04fbddbaedaa878d60f11, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4778750602947571259, guid: 17d5316533d04fbddbaedaa878d60f11, type: 3}
+      propertyPath: m_Lightmapping
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4778750602947571259, guid: 17d5316533d04fbddbaedaa878d60f11, type: 3}
+      propertyPath: m_Shadows.m_Type
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8433861175686851061, guid: 17d5316533d04fbddbaedaa878d60f11, type: 3}
