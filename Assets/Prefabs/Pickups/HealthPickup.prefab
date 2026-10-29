@@ -571,7 +571,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupHealth
   canRespawn: 0
-  respawnTime: 5
+  respawnTime: 60
   rotationSpeed: 100
   floatAmplitude: 0.3
   floatFrequency: 2
