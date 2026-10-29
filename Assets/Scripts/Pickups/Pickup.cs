@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Pickup : MonoBehaviour
+public abstract class Pickup : MonoBehaviour
 {
 
     private bool isActive;
@@ -12,12 +12,9 @@ public class Pickup : MonoBehaviour
     [SerializeField]private float respawnTime=5f;//Tiempo que tarda en reaparecer
     private float respawnTimer;//El timer que controla el respawn
 
-
-    private int amount;
-
     //----------------[Posicion y Rotacion]----------------
 
-    [SerializeField]private float rotationSpeed=1f;
+    [SerializeField]private float rotationSpeed=100f;
     private float startPositionY;
     [SerializeField]private float floatAmplitude = 0.3f; // Altura del movimiento
     [SerializeField]private float floatFrequency = 2f;   // Velocidad de subida y bajada
@@ -54,7 +51,7 @@ public class Pickup : MonoBehaviour
         }
     }
 
-    protected virtual void collectPickup()
+    protected virtual void collectPickup(Player player)
     {
         if (!isActive) return;
         isActive=false;
@@ -76,7 +73,7 @@ public class Pickup : MonoBehaviour
     }
     protected virtual void Spin()
     {
-      transform.Rotate(new Vector3(0, rotationSpeed*Time.deltaTime, 0));//Rotamos solo la y
+      transform.Rotate(new Vector3(0, rotationSpeed*Time.deltaTime, 0),Space.World);//Rotamos solo la y
       
       //Le añadimos la posicion inicial al valor dado
       float newY = startPositionY + Mathf.Sin(Time.time * floatFrequency)//Multiplicamos el tiempo pasado por la frequencia(velocidad de subida)
@@ -94,7 +91,7 @@ public class Pickup : MonoBehaviour
         Player player = other.GetComponentInParent<Player>();
         if (player == null|| !isActive) return;
 
-         collectPickup();             
+         collectPickup(player);             
             
     }
 }

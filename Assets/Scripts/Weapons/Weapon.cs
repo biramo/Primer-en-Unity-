@@ -60,6 +60,14 @@ public class Weapon : MonoBehaviour
 
         ShowAmmoEvent(ammo,ammoInMagazine);
     }
+
+    public void RecibeAmmo(int munition)
+    {
+        int ammoNeeded=maxAmmo-ammo;
+        int ammoToLoad=Math.Min(ammoNeeded,munition);
+
+        ammo+=ammoToLoad;
+    }
     public void Shoot()
     {   
         Vector3 rayOrigin = origin.position;
@@ -77,7 +85,7 @@ public class Weapon : MonoBehaviour
 
             //instanciación de una bala
             //Recibe el objeto,el origen y la rotacion
-            newBullet=Instantiate(bullet,originBullet,Quaternion.LookRotation(realDirection));
+            newBullet=Instantiate(bullet,originBullet,Quaternion.LookRotation(realDirection)*bullet.transform.rotation);
             //Quaternion.LookRotation nos dala bala orientada a la dirección del disparo
             newBullet.GetComponent<Rigidbody>().AddForce(realDirection*shotForce);
 

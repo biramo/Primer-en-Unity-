@@ -197,11 +197,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   origin: {fileID: 2844839502414115732}
-  bullet: {fileID: 6931603491535867256, guid: e155d6e390f2b9837a988b3c3b2e5424, type: 3}
   spawnPoint: {fileID: 2844839502414115732}
-  directionShoot: {fileID: 0}
+  bullet: {fileID: 1790383090837439569, guid: b7e6f8d06153b805891e3bc03631ce82, type: 3}
   damage: 20
   maxDistance: 15
+  ammo: 120
+  maxAmmoInCharger: 7
+  ammoInMagazine: 7
+  maxAmmo: 300
 --- !u!1 &9079162143342389554
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,6 +22,16 @@ public class Entity : MonoBehaviour
         if (health <= 0) isDead=true;
     }
 
+    public void recibeHealth(int hp)
+    {
+        if(isDead) return;
+        int healthNeeded=maxHealth-health;
+        int healthToCure=Math.Min(healthNeeded,hp);
+
+        health+=healthToCure;
+        
+    }
+
     public virtual void OnEntityDead()
     {     
         Debug.Log($"Destruido: {gameObject.name}");    
