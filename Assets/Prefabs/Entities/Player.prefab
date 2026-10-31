@@ -332,11 +332,11 @@ MonoBehaviour:
   movementSpeed: 5
   sprintSpeed: 7
   jumpSpeed: 5
-  groundCheck: {fileID: 0}
+  groundCheck: {fileID: 3425699992129843577}
   groundRadius: 0.25
   groundMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
 --- !u!114 &-687521572981935192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,7 +349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba8252dcd850b5050a20ee708a3b2015, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Look
-  cameraTransform: {fileID: 0}
+  cameraTransform: {fileID: 6773364278774678250}
   sensitivity: 0.1
   minPitch: -80
   maxPitch: 80
@@ -365,11 +365,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d29e08f3f53b3fa89940ac7e4d4672e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  moveAction: {fileID: 0}
-  lookAction: {fileID: 0}
-  jumpAction: {fileID: 0}
-  sprintAction: {fileID: 0}
-  shootAction: {fileID: 0}
+  moveAction: {fileID: -1680190386980627800, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  lookAction: {fileID: -5630151704836100654, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  jumpAction: {fileID: -2099379676528639254, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  sprintAction: {fileID: -7471211009204490832, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  shootAction: {fileID: 1120369429361536294, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  rechargeAction: {fileID: 8328029124469748825, guid: 052faaac586de48259a63d0c4782560b, type: 3}
 --- !u!114 &-3826607297979794370
 MonoBehaviour:
   m_ObjectHideFlags: 0
