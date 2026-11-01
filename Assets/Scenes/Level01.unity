@@ -7624,6 +7624,17 @@ MonoBehaviour:
   - {fileID: 1491882764}
   - {fileID: 1192585603}
   - {fileID: 152784546}
+  waves:
+  - meleeCount: 1
+    distanceCount: 2
+    spawnInterval: 3
+  - meleeCount: 2
+    distanceCount: 3
+    spawnInterval: 2
+  - meleeCount: 3
+    distanceCount: 4
+    spawnInterval: 4
+  timeBetweenWaves: 20
 --- !u!1 &380063679
 GameObject:
   m_ObjectHideFlags: 0
@@ -18449,7 +18460,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 952146603}
-  - component: {fileID: 952146602}
+  - component: {fileID: 952146604}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -18457,20 +18468,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &952146602
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 952146601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89a5f3b6e142acbe483be4edbe0be2c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  player: {fileID: 1947051675}
-  loseDelay: 1.5
 --- !u!4 &952146603
 Transform:
   m_ObjectHideFlags: 0
@@ -18486,6 +18483,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &952146604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 952146601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89a5f3b6e142acbe483be4edbe0be2c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  player: {fileID: 1947051675}
+  spawner: {fileID: 376772784}
+  endDelay: 1.5
 --- !u!1001 &957012478
 PrefabInstance:
   m_ObjectHideFlags: 0

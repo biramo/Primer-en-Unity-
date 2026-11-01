@@ -38,7 +38,7 @@ public class Hud : MonoBehaviour
         weapon.AmmoUpdate+=UpdateAmmo;
         UpdateAmmo(weapon.Ammo,weapon.AmmoInMagazine);
 
-        waveSpawner.waveAction+=UpdateWave;
+        waveSpawner.WaveAction+=UpdateWave;
 
 
     }
@@ -47,7 +47,7 @@ public class Hud : MonoBehaviour
     {
         // darse de baja
         weapon.AmmoUpdate-=UpdateAmmo;
-        waveSpawner.waveAction-=UpdateWave;
+        waveSpawner.WaveAction-=UpdateWave;
 
 
     }

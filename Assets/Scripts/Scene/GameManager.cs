@@ -5,32 +5,36 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {   
     [SerializeField] private Player player;
-    [SerializeField] private float loseDelay = 1.5f;
-    private bool gameEnded;
-    
-    void Update()
-    {   if(player==null) return;
-    }
+    [SerializeField] private WaveSpawner spawner;
 
+    [SerializeField] private float endDelay = 0f;
+    private bool gameEnded;
     private void HandlePlayerDead(Entity e)
     {
         if (gameEnded) return;
+        spawner.StopWaves();
         gameEnded = true;
-        Invoke(nameof(LoadLoseScene), loseDelay);//Invocamos la pantalla de perdido con un delay
+        Invoke(nameof(LoadLoseScene), endDelay);//Invocamos la pantalla de perdido con un delay
     }
+
     void OnEnable()
     {   
+        if(player==null||spawner==null)return;
         player.Died+=HandlePlayerDead;
+        spawner.WavesCompleted+=LoadWinScene;
     }
+
+    
 
     void OnDisable()
-    {
+    {   
         player.Died-=HandlePlayerDead;
+        spawner.WavesCompleted-=LoadWinScene;
     }
 
-    public void LoadScene(string scene)
+    public void LoadWinScene()
     {
-        SceneManager.LoadScene(scene);
+        SceneManager.LoadScene("WinScene");
     }
     public void LoadLoseScene()
     {

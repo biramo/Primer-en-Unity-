@@ -34,6 +34,12 @@ using UnityEngine.AI;
         [SerializeField] private float attackRange=3f;
         private float DistanceToChangeWayPoint=2f;
         private Player player;
+        
+        //Constructor
+        public void Initialize(Transform[] wayPoints)
+        {
+            this.wayPoints=wayPoints;
+        }
 
         void Start()
         {   
@@ -226,11 +232,6 @@ using UnityEngine.AI;
         public float UpdatePathRate
         {
             get{return updatePathRate;}
-        }
-
-        public Transform[] Waypoints
-        {
-          set{wayPoints=value;}  
         } 
 
         public NavMeshAgent Agent
