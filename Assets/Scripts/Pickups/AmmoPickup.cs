@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NewMonoBehaviourScript : Pickup
+public class AmmoPickup : Pickup
 {
    [SerializeField] private int amountAmoo=50;
     protected override void collectPickup(Player player)

@@ -33,7 +33,7 @@ public class Weapon : MonoBehaviour
 
     //---------------[Stats del disparo]---------------
 
-    private float shotForce=150;
+    private float shotForce=300;
     private float shotRate=0.5f;
     private float shotRateTime=0;
 

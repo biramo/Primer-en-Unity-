@@ -210,12 +210,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDistance
   health: 100
   maxHealth: 100
-  rangeDetection: 10
+  rangeDetection: 30
   damage: 20
   chasingSpeed: 5
-  patrolingSpeed: 3
+  patrolingSpeed: 7
   StoppingDistance: 0
   wayPoints:
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   attackRate: 3
   attackRange: 8

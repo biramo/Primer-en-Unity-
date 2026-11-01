@@ -228,6 +228,11 @@ using UnityEngine.AI;
             get{return updatePathRate;}
         }
 
+        public Transform[] Waypoints
+        {
+          set{wayPoints=value;}  
+        } 
+
         public NavMeshAgent Agent
         {
            get{return navMeshAgent;} 
