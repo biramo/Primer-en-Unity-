@@ -1,11 +1,15 @@
 using System;
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class WaveSpawner : MonoBehaviour
 {
     //----------------Enemies----------------
     private int enemiesAlive;
+
+    private List<Enemy> enemies;
 
     [SerializeField] GameObject enemyDistance;
 
@@ -18,8 +22,8 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] private Wave[] waves;
     //----------------Waves----------------
     [SerializeField] private float timeBetweenWaves=20f;
-    public event Action<int,int>WaveAction;
-
+    public event Action<int,int> WaveStarted;          // (oleada actual, total de oleadas)    public event Action<int>     EnemiesAliveChanged;  // (vivos)
+    public event Action<int> EnemiesAliveChanged;  // (vivos)
     public event Action WavesCompleted;
 
     private int currentWave;
@@ -30,7 +34,7 @@ public class WaveSpawner : MonoBehaviour
 
     //----------------------LogicSpawns----------------------
     void Start()
-    {
+    {   
         StartWaves();
     }
 
@@ -45,6 +49,16 @@ public class WaveSpawner : MonoBehaviour
         StopCoroutine(wavesCoroutine);
         wavesCoroutine = null;
     }
+
+    void OnDisable()
+    {
+        if(enemies==null||enemies.Count()<=0)return;
+
+        foreach(Enemy e in enemies)
+        {
+            e.Died-=HandleEnemyDead;
+        }
+    }
     private void SpawnEnemy(GameObject enemy)
     {
         if (spawnPoints.Length == 0 || enemy == null) return; //Comprobamos antes de spawnear
@@ -58,11 +72,12 @@ public class WaveSpawner : MonoBehaviour
 
         AssignWaypoints(e);
 
+        enemies.Add(e);
+
         e.Died+=HandleEnemyDead;
 
         enemiesAlive++;
-
-        WaveAction?.Invoke(currentWave,enemiesAlive); //Evento disparado
+        EnemiesAliveChanged?.Invoke(enemiesAlive); //Evento disparado
     }
     
     private IEnumerator SpawnWave(Wave wave)//Corutina para iniciar oleada actual
@@ -87,7 +102,8 @@ public class WaveSpawner : MonoBehaviour
         for(int i=0; i < waves.Length; i++)
         {   
             currentWave=i+1;
-
+            WaveStarted?.Invoke(currentWave,waves.Length);
+            
             bool isLast = i == waves.Length - 1;
            
             yield return SpawnWave(waves[i]);
@@ -110,7 +126,7 @@ public class WaveSpawner : MonoBehaviour
     {
         e.Died-=HandleEnemyDead;
         enemiesAlive--;
-        WaveAction?.Invoke(currentWave,enemiesAlive);
+        EnemiesAliveChanged?.Invoke(enemiesAlive);
     }
 
 }

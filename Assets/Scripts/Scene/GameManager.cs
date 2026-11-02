@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadMainScene()
     {
-     SceneManager.LoadScene("MainScene");   
+     SceneManager.LoadScene("Level01");   
     }
 
     public void LoadMenuScene()

@@ -19,6 +19,9 @@ public class Hud : MonoBehaviour
     [SerializeField] private TMP_Text totalEnemiesText;
     [SerializeField] private TMP_Text actualWaveText;
 
+    [SerializeField] private TMP_Text totalWavesText;
+
+
 
    void Awake()
     {
@@ -38,7 +41,8 @@ public class Hud : MonoBehaviour
         weapon.AmmoUpdate+=UpdateAmmo;
         UpdateAmmo(weapon.Ammo,weapon.AmmoInMagazine);
 
-        waveSpawner.WaveAction+=UpdateWave;
+        waveSpawner.EnemiesAliveChanged+=UpdateEnemiesWave;
+        waveSpawner.WaveStarted+=UpdateWaves;
 
 
     }
@@ -47,7 +51,8 @@ public class Hud : MonoBehaviour
     {
         // darse de baja
         weapon.AmmoUpdate-=UpdateAmmo;
-        waveSpawner.WaveAction-=UpdateWave;
+        waveSpawner.EnemiesAliveChanged-=UpdateEnemiesWave;
+        waveSpawner.WaveStarted-=UpdateWaves;
 
 
     }
@@ -64,11 +69,16 @@ public class Hud : MonoBehaviour
         healthBar.fillAmount=(float)player.Health/player.MaxHealth;
     }
 
-    private void UpdateWave(int actualWave, int enemiesInWave)
+    private void UpdateEnemiesWave(int enemiesInWave)
     {
-        actualWaveText.text=actualWave.ToString();
         totalEnemiesText.text=enemiesInWave.ToString();
 
+    }
+
+    private void UpdateWaves(int actualWave,int MaxWave)
+    {
+        actualWaveText.text=actualWave.ToString();
+        totalWavesText.text=MaxWave.ToString();
     }
 
 }
