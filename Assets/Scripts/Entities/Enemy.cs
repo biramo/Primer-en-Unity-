@@ -13,8 +13,9 @@ using UnityEngine.AI;
 
 
 //------------------------------Object Variables--------------------------------
-        private Renderer rdr;
         private Collider collider;
+
+        private Animator animator;
 
 //------------------------------WayPoints--------------------------------
 
@@ -27,11 +28,11 @@ using UnityEngine.AI;
 
         private EnemyState stateEnemy;
         
-        [SerializeField] private float attackRate=1f;
+        [SerializeField] private float attackRate=3f;
         private float attackRateTime=0;
         private float updatePathRate = 0.2f;
         private float nextPathUpdate=0;
-        [SerializeField] private float attackRange=3f;
+        [SerializeField] private float attackRange=2f;
         private float DistanceToChangeWayPoint=2f;
         private Player player;
         
@@ -44,9 +45,9 @@ using UnityEngine.AI;
         void Start()
         {   
             collider=GetComponentInChildren<Collider>();
-            rdr=GetComponentInChildren<Renderer>();
             navMeshAgent=GetComponent<NavMeshAgent>();
             player=FindAnyObjectByType<Player>();
+            animator=GetComponent<Animator>();
             navMeshAgent.stoppingDistance=StoppingDistance;
             stateEnemy=EnemyState.Patrol;
 
@@ -70,10 +71,18 @@ using UnityEngine.AI;
             CheckIsDead();
             UpdateState();
             ExecuteState();
+            UpdateAnimation();
+
+        }
+
+        private void UpdateAnimation()
+        {
+            animator.SetInteger("state",(int)stateEnemy);
+            
         }
         protected virtual void UpdateState()
         {   
-
+            
             if(stateEnemy==EnemyState.Dead) return;  
 
             float DistanceFromPlayer=CalculateDistanceFromAPoint(player.transform);
@@ -93,6 +102,8 @@ using UnityEngine.AI;
                 }
                 nextPathUpdate=Time.time+updatePathRate;
             }         
+
+
         }
 
         protected float CalculateDistanceFromAPoint(Transform point)//Nos devuelve la distancia entre el enemigo y el player
@@ -121,22 +132,28 @@ using UnityEngine.AI;
             switch (stateEnemy)
             {
                 case EnemyState.Attack: 
-                navMeshAgent.stoppingDistance=StoppingDistance;
-                Attack(); break;
-                case EnemyState.Chasing:Chasing(); break;
+                    navMeshAgent.stoppingDistance=StoppingDistance;
+                    Attack();
+                    break;
+                case EnemyState.Chasing:Chasing(); 
+                    break;
                 case EnemyState.Patrol: 
-                navMeshAgent.stoppingDistance=DistanceToChangeWayPoint; 
-                Patrol(); break;
-                case EnemyState.Dead:  break;
+                    navMeshAgent.stoppingDistance=DistanceToChangeWayPoint; 
+                    Patrol(); break;
+                case EnemyState.Dead:  
+                    break;
 
             }
         }
         protected virtual void Attack()
         {
             if (Time.time < attackRateTime) return;
+            animator.SetTrigger("Attack");
+
             player.TakeDamage(damage);
 
             attackRateTime = Time.time + attackRate;
+
         }
         
 
@@ -192,7 +209,6 @@ using UnityEngine.AI;
             navMeshAgent.isStopped=true;
             //Desactivamos el collider y le cambiamos el color
             collider.enabled=false;
-            rdr.material.color=Color.red;
             Destroy(gameObject,2);  
         }
 
