@@ -2,14 +2,11 @@ using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 public class WaveSpawner : MonoBehaviour
 {
     //----------------Enemies----------------
-    private int enemiesAlive;
-
-    private List<Enemy> enemies;
+    private List<Enemy> enemies= new List<Enemy>();
 
     [SerializeField] GameObject enemyDistance;
 
@@ -52,7 +49,7 @@ public class WaveSpawner : MonoBehaviour
 
     void OnDisable()
     {
-        if(enemies==null||enemies.Count()<=0)return;
+        if(enemies==null||enemies.Count<=0)return;
 
         foreach(Enemy e in enemies)
         {
@@ -76,8 +73,7 @@ public class WaveSpawner : MonoBehaviour
 
         e.Died+=HandleEnemyDead;
 
-        enemiesAlive++;
-        EnemiesAliveChanged?.Invoke(enemiesAlive); //Evento disparado
+        EnemiesAliveChanged?.Invoke(enemies.Count); //Evento disparado
     }
     
     private IEnumerator SpawnWave(Wave wave)//Corutina para iniciar oleada actual
@@ -108,7 +104,7 @@ public class WaveSpawner : MonoBehaviour
            
             yield return SpawnWave(waves[i]);
 
-            yield return new WaitUntil(()=>enemiesAlive<=0);
+            yield return new WaitUntil(()=>enemies.Count<=0);
            if(!isLast) yield return new WaitForSeconds(timeBetweenWaves);
         }
 
@@ -123,10 +119,13 @@ public class WaveSpawner : MonoBehaviour
     }
 
     private void HandleEnemyDead(Entity e)
-    {
+    {   
         e.Died-=HandleEnemyDead;
-        enemiesAlive--;
-        EnemiesAliveChanged?.Invoke(enemiesAlive);
+         if (e is Enemy enemy)
+        {
+            enemies.Remove(enemy);
+        }
+        EnemiesAliveChanged?.Invoke(enemies.Count);
     }
 
 }

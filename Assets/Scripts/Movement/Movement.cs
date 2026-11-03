@@ -28,7 +28,7 @@ public class Movement : MonoBehaviour
         float yDirection=rb.linearVelocity.y;
         float Xdirection=direction.x*movementSpeed;
         float Zdirection=direction.z*movementSpeed;
-        if(onGround && isSprinting)
+        if(isSprinting)
         {
             Xdirection=direction.x*sprintSpeed;
             Zdirection=direction.z*sprintSpeed;
@@ -39,14 +39,12 @@ public class Movement : MonoBehaviour
         {
             yDirection=jumpSpeed;
         }
-         
         
         rb.linearVelocity= new Vector3(
         Xdirection,
         yDirection,
         Zdirection
         );
-          
 
     }
     

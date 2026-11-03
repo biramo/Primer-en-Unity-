@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
         jumpAction.action.Enable();
         shootAction.action.Enable();
         sprintAction.action.Enable();
+        rechargeAction.action.Enable();
 
     }
 
@@ -54,6 +55,8 @@ public class PlayerController : MonoBehaviour
         jumpAction.action.Disable();
         shootAction.action.Disable();
         sprintAction.action.Disable();
+        rechargeAction.action.Disable();
+
 
         Cursor.lockState=CursorLockMode.None;
         Cursor.visible=true;
