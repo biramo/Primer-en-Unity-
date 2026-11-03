@@ -21,20 +21,7 @@ public class Hud : MonoBehaviour
 
     [SerializeField] private TMP_Text totalWavesText;
 
-
-
-   void Awake()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        UpdateHealth();
-        
-    }
-
-     private void OnEnable()
+    private void OnEnable()
     {   
         // suscribirse al evento del arma
         // pintar el valor actual una vez, para no esperar al primer disparo
@@ -43,6 +30,8 @@ public class Hud : MonoBehaviour
 
         waveSpawner.EnemiesAliveChanged+=UpdateEnemiesWave;
         waveSpawner.WaveStarted+=UpdateWaves;
+
+        player.HealthTaken+=UpdateHealth;
 
 
     }
@@ -54,6 +43,8 @@ public class Hud : MonoBehaviour
         waveSpawner.EnemiesAliveChanged-=UpdateEnemiesWave;
         waveSpawner.WaveStarted-=UpdateWaves;
 
+        player.HealthTaken-=UpdateHealth;
+
 
     }
 
@@ -63,10 +54,10 @@ public class Hud : MonoBehaviour
         ammoInMagazineText.text=ammoInMagazine.ToString();
     }
 
-    private void UpdateHealth()
+    private void UpdateHealth(int health, int maxHealth)
     {
         if(healthBar==null) return;
-        healthBar.fillAmount=(float)player.Health/player.MaxHealth;
+        healthBar.fillAmount=(float)health/maxHealth;
     }
 
     private void UpdateEnemiesWave(int enemiesInWave)
