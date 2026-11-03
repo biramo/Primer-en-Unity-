@@ -26,11 +26,8 @@ public class Player : Entity
     }  
     public override void OnEntityDead()
     {  
-       playerController.enabled=false;//desactivamos al jugador
-      
-       Rigidbody rb = GetComponent<Rigidbody>();
-       rb.linearVelocity = Vector3.zero;
-       rb.angularVelocity = Vector3.zero;
+       if(deadHandled) return;
+       playerController.enabled=false;//desactivamos el input del jugador
 
        deadHandled=true;
        base.OnEntityDead();
