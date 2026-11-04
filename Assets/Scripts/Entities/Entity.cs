@@ -11,7 +11,7 @@ public class Entity : MonoBehaviour
     [SerializeField] private int maxHealth=100;
 
     public event Action<Entity> Died; //Avisa sobre la accion los subscriptores pueden hacer cosas en funcion de eso
-    public event Action<int,int> HealthTaken; //Avisa sobre la accion los subscriptores pueden hacer cosas en funcion de eso
+    public event Action<int,int> HealthUpdated; //Avisa sobre la accion los subscriptores pueden hacer cosas en funcion de eso
     
     private bool isDead=false;
     public void TakeDamage(int damage)
@@ -21,7 +21,7 @@ public class Entity : MonoBehaviour
         health = Mathf.Clamp(health, 0, maxHealth);
         health-=damage;
 
-        HealthTaken?.Invoke(health,maxHealth);
+        HealthUpdated?.Invoke(health,maxHealth);
 
         if (health <= 0) isDead=true;
     }
@@ -33,6 +33,8 @@ public class Entity : MonoBehaviour
         int healthToCure=Math.Min(healthNeeded,hp);
 
         health+=healthToCure;
+
+        HealthUpdated?.Invoke(health,maxHealth);
         
     }
 

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
     public abstract class Enemy : Entity
@@ -9,7 +10,6 @@ using UnityEngine.AI;
         [SerializeField] private int damage=20;
         [SerializeField] private float chasingSpeed = 5f;
         [SerializeField] private float patrolingSpeed = 3f;
-        [SerializeField] private float StoppingDistance = 1f;
 
 
 //------------------------------Object Variables--------------------------------
@@ -28,8 +28,10 @@ using UnityEngine.AI;
 
         private EnemyState stateEnemy;
         
-        [SerializeField] private float attackRate=3f;
-        private float attackRateTime=0;
+        [SerializeField]
+
+        private int lastAttack;
+     
         private float updatePathRate = 0.2f;
         private float nextPathUpdate=0;
         [SerializeField] private float attackRange=2f;
@@ -48,13 +50,12 @@ using UnityEngine.AI;
             navMeshAgent=GetComponent<NavMeshAgent>();
             player=FindAnyObjectByType<Player>();
             animator=GetComponent<Animator>();
-            navMeshAgent.stoppingDistance=StoppingDistance;
             stateEnemy=EnemyState.Patrol;
 
 
-            if (player == null)//Si no encuentra al player desactivamos los update
+            if (player == null||animator==null)//Si no encuentra al player desactivamos los update
             {
-                Debug.LogWarning("No se ha encontrado ningun jugador",this);
+                Debug.LogWarning("No se ha encontrado ningun jugador o componente animator",this);
                 enabled = false;
             }
             navMeshAgent.speed=chasingSpeed;
@@ -77,7 +78,7 @@ using UnityEngine.AI;
 
         private void UpdateAnimation()
         {
-            animator.SetInteger("state",(int)stateEnemy);
+            animator.SetInteger(AnimParams.State,(int)stateEnemy);
             
         }
         protected virtual void UpdateState()
@@ -132,7 +133,6 @@ using UnityEngine.AI;
             switch (stateEnemy)
             {
                 case EnemyState.Attack: 
-                    navMeshAgent.stoppingDistance=StoppingDistance;
                     Attack();
                     break;
                 case EnemyState.Chasing:Chasing(); 
@@ -145,21 +145,21 @@ using UnityEngine.AI;
 
             }
         }
-        protected virtual void Attack()
+        protected abstract void Attack();
+       
+
+        public void DealDamage()
         {
-            if (Time.time < attackRateTime) return;
-            animator.SetTrigger("Attack");
+            if (IsDead || player == null || player.IsDead) return;
+            if (CalculateDistanceFromAPoint(player.transform) > attackRange) return;
 
             player.TakeDamage(damage);
-
-            attackRateTime = Time.time + attackRate;
-
         }
         
 
        private void Patrol()
        {
-            if (wayPoints.Length == 0) return;
+            if (wayPoints.Length == 0||wayPoints==null) return;
 
             bool hasArrived = !navMeshAgent.pathPending
                             && navMeshAgent.remainingDistance <= DistanceToChangeWayPoint;

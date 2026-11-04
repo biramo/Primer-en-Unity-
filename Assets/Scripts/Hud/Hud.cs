@@ -27,7 +27,7 @@ public class Hud : MonoBehaviour
         // pintar el valor actual una vez, para no esperar al primer disparo
         weapon.AmmoUpdate+=UpdateAmmo;
         UpdateAmmo(weapon.Ammo,weapon.AmmoInMagazine);
-        player.HealthTaken+=UpdateHealth;
+        player.HealthUpdated+=UpdateHealth;
 
         if(waveSpawner==null)return;
         waveSpawner.EnemiesAliveChanged+=UpdateEnemiesWave;
@@ -41,7 +41,7 @@ public class Hud : MonoBehaviour
     {
         // darse de baja
         weapon.AmmoUpdate-=UpdateAmmo;
-        player.HealthTaken-=UpdateHealth;
+        player.HealthUpdated-=UpdateHealth;
         if(waveSpawner==null)return;
 
         waveSpawner.EnemiesAliveChanged-=UpdateEnemiesWave;
