@@ -2317,7 +2317,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3090553421314384451, guid: 07b176f19a7b45447893ce5ab468919f, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6773364278774678250, guid: 07b176f19a7b45447893ce5ab468919f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7862,7 +7862,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dce30206ab649faab0a226d7170bec9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveSpawner
-  enemyDistance: {fileID: 6641006125350567547, guid: bc8c24178cc422137b1dc9792fd803c8, type: 3}
+  enemyDistance: {fileID: 2505170828918142866, guid: f7a71def94b1f6b97b3d25f56fb8ba40, type: 3}
   enemyMele: {fileID: 128405962069124748, guid: f755d9f5a1a5f4986a7b84e8c289c01f, type: 3}
   spawnPoints:
   - {fileID: 1248824344}
@@ -7873,13 +7873,16 @@ MonoBehaviour:
   - {fileID: 152784546}
   waves:
   - meleeCount: 4
-    distanceCount: 0
-    spawnInterval: 1
-  - meleeCount: 2
-    distanceCount: 3
-    spawnInterval: 1
-  - meleeCount: 3
     distanceCount: 4
+    spawnInterval: 1
+  - meleeCount: 8
+    distanceCount: 9
+    spawnInterval: 1
+  - meleeCount: 12
+    distanceCount: 10
+    spawnInterval: 2
+  - meleeCount: 15
+    distanceCount: 13
     spawnInterval: 2
   timeBetweenWaves: 10
 --- !u!1 &380063679

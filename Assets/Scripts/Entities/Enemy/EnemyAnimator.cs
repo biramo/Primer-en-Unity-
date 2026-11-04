@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class EnemyAnimator: MonoBehaviour
+public class EnemyAnimator: MonoBehaviour //Encargada de la animacion del personaje
 {
     [SerializeField] private Animator animator;
 
@@ -40,7 +40,4 @@ public class EnemyAnimator: MonoBehaviour
     {
         OnDealDamage?.Invoke();
     }
-
-
-
 }

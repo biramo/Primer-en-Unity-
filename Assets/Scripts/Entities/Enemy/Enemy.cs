@@ -15,7 +15,7 @@ using UnityEngine.AI;
 //------------------------------Object Variables--------------------------------
         private Collider collider;
 
-        private Animator animator;
+        [SerializeField] protected EnemyAnimator enemyAnimator;
 
 //------------------------------WayPoints--------------------------------
 
@@ -28,10 +28,6 @@ using UnityEngine.AI;
 
         private EnemyState stateEnemy;
         
-        [SerializeField]
-
-        private int lastAttack;
-     
         private float updatePathRate = 0.2f;
         private float nextPathUpdate=0;
         [SerializeField] private float attackRange=2f;
@@ -49,11 +45,11 @@ using UnityEngine.AI;
             collider=GetComponentInChildren<Collider>();
             navMeshAgent=GetComponent<NavMeshAgent>();
             player=FindAnyObjectByType<Player>();
-            animator=GetComponent<Animator>();
+            enemyAnimator=GetComponent<EnemyAnimator>();
             stateEnemy=EnemyState.Patrol;
 
 
-            if (player == null||animator==null)//Si no encuentra al player desactivamos los update
+            if (player == null||enemyAnimator==null)//Si no encuentra al player desactivamos los update
             {
                 Debug.LogWarning("No se ha encontrado ningun jugador o componente animator",this);
                 enabled = false;
@@ -78,7 +74,7 @@ using UnityEngine.AI;
 
         private void UpdateAnimation()
         {
-            animator.SetInteger(AnimParams.State,(int)stateEnemy);
+            enemyAnimator.SetState(stateEnemy);
             
         }
         protected virtual void UpdateState()
@@ -145,7 +141,7 @@ using UnityEngine.AI;
 
             }
         }
-        protected abstract void Attack();
+        protected abstract void Attack();//Cada enemigo implementa su forma de ataque
        
 
         public void TakeDamagePlayer()

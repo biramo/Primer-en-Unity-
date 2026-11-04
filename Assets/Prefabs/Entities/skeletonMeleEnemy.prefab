@@ -405,6 +405,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1571042049591659991, guid: 61b3e3801d56a3f429556c96ea2f07d6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6345866285278788740}
+    - targetCorrespondingSourceObject: {fileID: 1571042049591659991, guid: 61b3e3801d56a3f429556c96ea2f07d6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8189859870101317755}
   m_SourcePrefab: {fileID: 100100000, guid: 61b3e3801d56a3f429556c96ea2f07d6, type: 3}
 --- !u!1 &128405962069124748 stripped
 GameObject:
@@ -427,15 +430,15 @@ MonoBehaviour:
   maxHealth: 100
   rangeDetection: 10
   damage: 20
-  chasingSpeed: 5
-  patrolingSpeed: 3
-  StoppingDistance: 1
+  chasingSpeed: 7
+  patrolingSpeed: 5
+  enemyAnimator: {fileID: 8189859870101317755}
   wayPoints:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  attackRate: 1
   attackRange: 3
+  attackRate: 1
 --- !u!195 &6864223735827420496
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -481,3 +484,21 @@ CapsuleCollider:
   m_Height: 2.0081658
   m_Direction: 1
   m_Center: {x: 0.0131008625, y: 0.7457962, z: 0.02120018}
+--- !u!114 &8189859870101317755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128405962069124748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 426d884ddc064f42cab94e0aba5bd4a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAnimator
+  animator: {fileID: 6657390017492657740}
+--- !u!95 &6657390017492657740 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5217009034759064855, guid: 61b3e3801d56a3f429556c96ea2f07d6, type: 3}
+  m_PrefabInstance: {fileID: 1442637189185858395}
+  m_PrefabAsset: {fileID: 0}

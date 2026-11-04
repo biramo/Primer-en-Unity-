@@ -9,5 +9,9 @@ AnimatorOverrideController:
   m_Name: AnimatorController_EnemyDistance
   m_Controller: {fileID: 9100000, guid: c8ef9fdf6018d56a99b2a3463a5f26b9, type: 2}
   m_Clips:
+  - m_OriginalClip: {fileID: 1712636332919063436, guid: e21b0b2125aad7d4b812953b874cd974, type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: c6babc638697b1c91b29c4a61330a71a, type: 3}
+  - m_OriginalClip: {fileID: 4805240366591498833, guid: 21a998651bdf326429e37004e170b7d4, type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: c6babc638697b1c91b29c4a61330a71a, type: 3}
   - m_OriginalClip: {fileID: -6076716484811970538, guid: 85b976b555a360642a5b0873d89e2f3f, type: 3}
-    m_OverrideClip: {fileID: 8568257729872559015, guid: 9ad86ec5cb863864eabd6fb0f3fd816c, type: 3}
+    m_OverrideClip: {fileID: -203655887218126122, guid: c6babc638697b1c91b29c4a61330a71a, type: 3}
