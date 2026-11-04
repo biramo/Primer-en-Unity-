@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class EnemyAnimator: MonoBehaviour
@@ -5,6 +6,8 @@ public class EnemyAnimator: MonoBehaviour
     [SerializeField] private Animator animator;
 
     private int lastAttack;
+
+    public event Action OnDealDamage;
 
     void Awake()
     {   
@@ -24,13 +27,18 @@ public class EnemyAnimator: MonoBehaviour
         int attackType;
         do
         {
-            attackType=Random.Range(0,3);
+            attackType=UnityEngine.Random.Range(0,3);
 
         }while(attackType==lastAttack);
 
         lastAttack=attackType;
         animator.SetInteger(AnimParams.AttackType,attackType);
         animator.SetTrigger(AnimParams.Attack);
+    }
+
+    public void DealDamage()
+    {
+        OnDealDamage?.Invoke();
     }
 
 

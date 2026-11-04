@@ -148,7 +148,7 @@ using UnityEngine.AI;
         protected abstract void Attack();
        
 
-        public void DealDamage()
+        public void TakeDamagePlayer()
         {
             if (IsDead || player == null || player.IsDead) return;
             if (CalculateDistanceFromAPoint(player.transform) > attackRange) return;

@@ -10,6 +10,16 @@ public class EnemyMele : Enemy
 
         if(enemyAnimator==null)enemyAnimator=GetComponentInChildren<EnemyAnimator>();
     }
+
+    void OnEnable()
+    {
+        enemyAnimator.OnDealDamage+=TakeDamagePlayer;
+    }
+
+    void OnDisable()
+    {
+        enemyAnimator.OnDealDamage-=TakeDamagePlayer;
+    }
     protected override void Attack()
     {
         if (Time.time < attackRateTime) return;
@@ -17,6 +27,8 @@ public class EnemyMele : Enemy
         attackRateTime = Time.time + attackRate;
         enemyAnimator.PlayAttack();
     }
+
+    
 
       
 }
