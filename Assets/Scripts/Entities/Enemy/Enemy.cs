@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
     public abstract class Enemy : Entity
@@ -15,7 +14,7 @@ using UnityEngine.AI;
 //------------------------------Object Variables--------------------------------
         private Collider collider;
 
-        [SerializeField] protected EnemyAnimator enemyAnimator;
+        [SerializeField] protected EnemyAnimator enemyAnimator; //Encargado de las animaciones
 
 //------------------------------WayPoints--------------------------------
 
@@ -72,7 +71,7 @@ using UnityEngine.AI;
 
         }
 
-        private void UpdateAnimation()
+        private void UpdateAnimation() //Con el estado actual sabemos la animacion a reproducir
         {
             enemyAnimator.SetState(stateEnemy);
             
@@ -99,8 +98,6 @@ using UnityEngine.AI;
                 }
                 nextPathUpdate=Time.time+updatePathRate;
             }         
-
-
         }
 
         protected float CalculateDistanceFromAPoint(Transform point)//Nos devuelve la distancia entre el enemigo y el player
