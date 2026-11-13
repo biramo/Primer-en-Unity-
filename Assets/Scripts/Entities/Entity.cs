@@ -14,7 +14,7 @@ public class Entity : MonoBehaviour
     public event Action<int,int> HealthUpdated; //Avisa sobre la accion los subscriptores pueden hacer cosas en funcion de eso
     
     private bool isDead=false;
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {   
         if(isDead) return;
 

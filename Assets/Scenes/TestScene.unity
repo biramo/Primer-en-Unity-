@@ -4353,6 +4353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hud
   healthBar: {fileID: 980541084}
+  shieldBar: {fileID: 0}
   player: {fileID: 1611424951}
   weapon: {fileID: 1759131438288857399}
   totalAmmoText: {fileID: 1695202420}
@@ -5929,7 +5930,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: cf6ae42d58e00cdca8f1224594149ee5, type: 3}
+  m_Texture: {fileID: 2800000, guid: bce816cd74fa658019098f2dd3bf7918, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0

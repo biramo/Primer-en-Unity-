@@ -6,6 +6,9 @@ public class Hud : MonoBehaviour
 {   
     //----------------Player----------------
     [SerializeField ]private Image healthBar;
+
+    [SerializeField ]private Image shieldBar;
+
     [SerializeField] private Player player;
 
     //----------------Weapon----------------
@@ -28,6 +31,7 @@ public class Hud : MonoBehaviour
         weapon.AmmoUpdate+=UpdateAmmo;
         UpdateAmmo(weapon.Ammo,weapon.AmmoInMagazine);
         player.HealthUpdated+=UpdateHealth;
+        player.ShieldUpdated+=UpdateShield;
 
         if(waveSpawner==null)return;
         waveSpawner.EnemiesAliveChanged+=UpdateEnemiesWave;
@@ -42,6 +46,8 @@ public class Hud : MonoBehaviour
         // darse de baja
         weapon.AmmoUpdate-=UpdateAmmo;
         player.HealthUpdated-=UpdateHealth;
+        player.ShieldUpdated-=UpdateShield;
+
         if(waveSpawner==null)return;
 
         waveSpawner.EnemiesAliveChanged-=UpdateEnemiesWave;
@@ -58,6 +64,12 @@ public class Hud : MonoBehaviour
     {
         if(healthBar==null) return;
         healthBar.fillAmount=(float)health/maxHealth;
+    }
+
+    private void UpdateShield(int shield, int maxShield)
+    {
+        if(shieldBar==null) return;
+        shieldBar.fillAmount=(float)shield/maxShield;
     }
 
     private void UpdateEnemiesWave(int enemiesInWave)
